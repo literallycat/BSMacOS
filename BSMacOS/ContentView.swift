@@ -9,12 +9,49 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationView {
-            SidebarView()
-            DownloadView()
+        NavigationSplitView {
+            List {
+                NavigationLink{
+                    DownloadView()
+                }label: {
+                    Label("Download Versions", systemImage: "tray.and.arrow.down")
+                }
+                
+                NavigationLink{
+                    Text("shared")
+                } label: {
+                    Label("Shared Content", systemImage: "square.and.arrow.up.circle")
+                }
+                
+                Divider()
+                
+                NavigationLink{
+                    Text("Destination 1")
+                } label: {
+                    Label("1.40.8", systemImage: "gamecontroller")
+                }
+                
+                NavigationLink{
+                    Text("Destination 1")
+                } label: {
+                    Label("1.40.8", systemImage: "arrow.down.circle.dotted")
+                }
+            }
+            .navigationTitle("Sidebar")
+        } detail: {
+            ContentUnavailableView("Select an element from the sidebar", systemImage: "doc.text.image.fill")
         }
     }
 }
+
+//struct ContentView: View {
+//    var body: some View {
+//        NavigationView {
+//            SidebarView()
+//            DownloadView()
+//        }
+//    }
+//}
 
 struct SidebarView: View {
     var body: some View {
