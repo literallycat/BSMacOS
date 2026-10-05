@@ -10,59 +10,43 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationSplitView {
-            List {
-                NavigationLink{
-                    DownloadView()
-                }label: {
-                    Label("Download Versions", systemImage: "tray.and.arrow.down")
-                }
-                
-                NavigationLink{
-                    Text("shared")
-                } label: {
-                    Label("Shared Content", systemImage: "square.and.arrow.up.circle")
-                }
-                
-                Divider()
-                
-                NavigationLink{
-                    Text("Destination 1")
-                } label: {
-                    Label("1.40.8", systemImage: "gamecontroller")
-                }
-                
-                NavigationLink{
-                    Text("Destination 1")
-                } label: {
-                    Label("1.40.8", systemImage: "arrow.down.circle.dotted")
-                }
-            }
-            .navigationTitle("Sidebar")
+           SidebarView()
         } detail: {
-            ContentUnavailableView("Select an element from the sidebar", systemImage: "doc.text.image.fill")
+            ContentUnavailableView("Welcome To BSMacOS", systemImage: "doc.text.image.fill")
         }
     }
 }
 
-//struct ContentView: View {
-//    var body: some View {
-//        NavigationView {
-//            SidebarView()
-//            DownloadView()
-//        }
-//    }
-//}
-
 struct SidebarView: View {
     var body: some View {
-            List{
+        List {
+            NavigationLink{
+                DownloadView()
+            }label: {
                 Label("Download Versions", systemImage: "tray.and.arrow.down")
+            }
+            
+            NavigationLink{
+                Text("shared")
+            } label: {
                 Label("Shared Content", systemImage: "square.and.arrow.up.circle")
-                Divider()
+            }
+            
+            Divider()
+            
+            NavigationLink{
+                Text("Destination 1")
+            } label: {
                 Label("1.40.8", systemImage: "gamecontroller")
+            }
+            
+            NavigationLink{
+                Text("Destination 1")
+            } label: {
                 Label("1.40.8", systemImage: "arrow.down.circle.dotted")
             }
-            .frame(minWidth: 200)
+        }
+        .navigationTitle("Sidebar")
     }
 }
 
@@ -86,7 +70,7 @@ struct VersionView : View {
                     }
                     Button("Install"){} .buttonStyle(.borderedProminent)
                         .buttonBorderShape(.roundedRectangle(radius: 8))
-                        .tint(.blue)
+                        .tint(.blue).font(.caption)
                     
                 }
                 ProgressView(value: 0).frame(maxWidth: 120)
