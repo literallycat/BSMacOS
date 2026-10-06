@@ -95,6 +95,40 @@ struct DownloadVersionView : View {
     }
 }
 
+
+struct GameView : View {
+    @State private var FPFC = true
+    @State private var Debug = true
+    @State private var DebugSrv = true
+    @State private var LaunchArgs = ""
+    var body: some View {
+        VStack{
+            Text("1.40.8").font(.largeTitle)
+            HStack{
+                Toggle(isOn: $FPFC) {
+                        Text("FPFC")
+                }.toggleStyle(.button)
+                Toggle(isOn: $Debug) {
+                        Text("Debug Mode")
+                }.toggleStyle(.button)
+                Toggle(isOn: $DebugSrv) {
+                        Text("Enable Debug Server")
+                }.toggleStyle(.button)
+            }
+            TextField(text: $LaunchArgs, prompt: Text("Custom Launch Arguments")) {}.frame(maxWidth: 300)
+            Spacer()
+            Button(action: { },
+                   label: {
+                Label("Launch Game", systemImage: "play")
+                
+            }
+            ).buttonStyle(.borderedProminent)
+                .buttonBorderShape(.roundedRectangle(radius: 8))
+                .tint(.blue)
+            Spacer()
+            
+        }}
+}
 #Preview {
     ContentView()
 }
