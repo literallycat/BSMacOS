@@ -35,13 +35,14 @@ struct SidebarView: View {
             Divider()
             
             NavigationLink{
-                Text("Destination 1")
+                GameView()
             } label: {
                 Label("1.40.8", systemImage: "gamecontroller")
             }
             
             NavigationLink{
-                Text("Destination 1")
+                ProgressView()
+                Text("Game is Installing")
             } label: {
                 Label("1.40.8", systemImage: "arrow.down.circle.dotted")
             }
@@ -52,28 +53,43 @@ struct SidebarView: View {
 
 struct DownloadView: View {
     var body: some View {
-        List{
-            VersionView()
+        LazyVGrid(columns: [GridItem(.flexible()),
+                            GridItem(.flexible()),
+                            GridItem(.flexible())]){
+            DownloadVersionView(imagePath: "urp", versionID: "1.44.2", releaseDate: "00/00/0000" )
+            DownloadVersionView(imagePath: "urp", versionID: "1.44.2", releaseDate: "00/00/0000" )
+            DownloadVersionView(imagePath: "urp", versionID: "1.44.2", releaseDate: "00/00/0000" )
+            DownloadVersionView(imagePath: "urp", versionID: "1.44.2", releaseDate: "00/00/0000" )
+            DownloadVersionView(imagePath: "urp", versionID: "1.44.2", releaseDate: "00/00/0000" )
+            DownloadVersionView(imagePath: "urp", versionID: "1.44.2", releaseDate: "00/00/0000" )
+
         }
 
     }}
 
-struct VersionView : View {
+struct DownloadVersionView : View {
+    let imagePath: String
+    let versionID: String
+    let releaseDate: String
     var body: some View {
         GroupBox{
             VStack(alignment: .leading, spacing: 5){
-                Image("urp").resizable()  .aspectRatio(contentMode: .fit)
-                    .frame(width: 120).cornerRadius(8)
+                Image(imagePath).resizable()  .aspectRatio(contentMode: .fit)
+                    .frame(width: 180).cornerRadius(8)
                 HStack{
                     VStack(alignment: .leading){
-                        Text("1.44.2").font(.title2)
+                        Text(versionID).font(.title2)
+                        Text("Released \(releaseDate)").font(.caption)
                     }
-                    Button("Install"){} .buttonStyle(.borderedProminent)
-                        .buttonBorderShape(.roundedRectangle(radius: 8))
-                        .tint(.blue).font(.caption)
-                    
                 }
-                ProgressView(value: 0).frame(maxWidth: 120)
+                HStack{
+                    Button(action: { },
+                           label: { Text("Install").font(.caption) }
+                    ).buttonStyle(.borderedProminent)
+                        .buttonBorderShape(.roundedRectangle(radius: 8))
+                        .tint(.blue)
+                    ProgressView(value: 0).frame(maxWidth: 120)
+                }
             }.padding(.vertical, 4)
         }
     }
